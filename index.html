@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>WASSI DELIVERY</title>
+  <meta name="description" content="WASSI DELIVERY — Aussitôt commandé, aussitôt livré.">
+  <meta name="theme-color" content="#E5AA22">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-96.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Wassi">
+  <link rel="stylesheet" href="css/app.css">
+  <script>
+    // Thème appliqué avant le premier affichage pour éviter le flash.
+    try { var t = localStorage.getItem('wassi.theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <div id="splash" aria-hidden="true"><div class="sp-in">
+    <div class="sp-logo"><span class="sp-ring"></span><span class="sp-ring r2"></span><div class="sp-img"><img src="icons/icon-192.png" alt="" width="124" height="124"></div></div>
+    <b class="sp-name"><span style="--i:0">W</span><span style="--i:1">A</span><span style="--i:2">S</span><span style="--i:3">S</span><span style="--i:4">I</span><span style="--i:5">&nbsp;</span><span style="--i:6">D</span><span style="--i:7">E</span><span style="--i:8">L</span><span style="--i:9">I</span><span style="--i:10">V</span><span style="--i:11">E</span><span style="--i:12">R</span><span style="--i:13">Y</span></b>
+    <span class="sp-slogan">Aussitôt commandé, aussitôt livré.</span>
+    <div class="sp-road"><svg viewBox="0 0 48 28"><circle cx="10" cy="21" r="5"/><circle cx="38" cy="21" r="5"/><path d="M10 21h14l6-12h5M30 9l8 12M18 21l-3-7H8M27 5h6"/><rect x="5" y="5" width="11" height="8" rx="1.500"/></svg></div>
+  </div></div>
+  <div id="app"></div>
+  <div id="modal"></div>
+  <div id="toasts" aria-live="polite"></div>
+  <noscript>Cette application a besoin de JavaScript pour fonctionner.</noscript>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pro.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/views.js"></script>
+</body>
+</html>

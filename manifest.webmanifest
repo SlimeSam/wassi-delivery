@@ -1,0 +1,16 @@
+{
+  "name": "WASSI DELIVERY",
+  "short_name": "Wassi",
+  "description": "Aussitôt commandé, aussitôt livré.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E5AA22",
+  "theme_color": "#E5AA22",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
