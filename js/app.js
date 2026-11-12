@@ -180,7 +180,7 @@ const Remote = {
   // Adresse du serveur : celle enregistrée sur cet appareil, sinon celle fournie avec l'app (js/config.js).
   get api() { const v = localStorage.getItem('wassi.api'); return v === 'off' ? '' : v || window.WASSI_API || ''; },
   get on() { return !!this.api; },
-  q: [], busy: false, online: true,
+  q: [], busy: false, online: true, pushes: 0,
   init() { try { this.q = JSON.parse(localStorage.getItem('wassi.q') || '[]'); } catch (e) { this.q = []; } },
   saveQ() { localStorage.setItem('wassi.q', JSON.stringify(this.q)); },
   async call(body, tok) {
@@ -189,7 +189,7 @@ const Remote = {
     return res.json();
   },
   // Chaque modification garde le jeton de la personne qui l'a faite : elle part avec ses droits, même si quelqu'un d'autre se connecte ensuite.
-  push(op) { if (!this.on) return; this.q.push({ ...op, _k: localStorage.getItem('wassi.token') || '' }); this.saveQ(); this.flush(); },
+  push(op) { if (!this.on) return; this.pushes++; this.q.push({ ...op, _k: localStorage.getItem('wassi.token') || '' }); this.saveQ(); this.flush(); },
   async flush() {
     if (this.busy || !this.q.length) return; this.busy = true;
     try {
@@ -206,7 +206,9 @@ const Remote = {
     if (!this.on || !U) return;
     await this.flush(); if (this.q.length) return render();
     try {
-      const r = await this.call({ a: 'state', since: +localStorage.getItem('wassi.since') || 0 });
+      const mark = this.pushes, r = await this.call({ a: 'state', since: +localStorage.getItem('wassi.since') || 0 });
+      // Une modification faite pendant la lecture est plus récente que la réponse : on relira au prochain passage.
+      if (this.pushes !== mark || this.q.length) return;
       this.online = true;
       if (r.ok) { mergeState(r.state); localStorage.setItem('wassi.since', r.now || 0); persist(); onExternal(); }
       else if (r.error === 'auth') logout();

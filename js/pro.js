@@ -59,6 +59,7 @@ function tracked(name, fn) {
 // Envoie au serveur une liste entière (stock, passages, caisse…) quand l'app est connectée.
 function blob(...keys) {
   if (!Remote.on) return;
+  Remote.pushes++;
   keys.forEach(k => { if (!Remote.busy) Remote.q = Remote.q.filter(op => !(op.t === 'set' && op.k === k)); Remote.q.push({ t: 'set', k, v: S[k], _k: localStorage.getItem('wassi.token') || '' }); });
   Remote.saveQ(); Remote.flush();
 }
